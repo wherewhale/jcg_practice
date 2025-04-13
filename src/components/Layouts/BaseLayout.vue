@@ -1,8 +1,6 @@
 <style scoped>
 .container {
   max-width: 768px !important;
-  /* TODO: 개발 이후 border 삭제 */
-  border: 1px solid #000;
   min-height: 100vh;
   padding: 0;
   position: relative;
@@ -17,9 +15,11 @@ main {
     <main class="d-flex align-items-center flex-column">
       <slot></slot>
     </main>
+    <BaseFooter />
   </div>
 </template>
 
 <script setup>
+import BaseFooter from './BaseFooter.vue';
 import BaseHeader from './BaseHeader.vue';
 </script>
