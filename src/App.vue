@@ -1,47 +1,63 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
+<style scoped></style>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <BaseLayout>
+    <Typography tag="h2" color="black" weight="bold" size="lg"> {{ currentData.title }} </Typography>
+    <Typography tag="h3" color="black" weight="bold" size="md"> {{ currentData.concept }} </Typography>
+    <figure class="mt-4" v-if="currentData?.src">
+      <img :src="currentData?.src" alt="concept image" class="w-100" />
+    </figure>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <div v-if="currentData?.types" class="w-100">
+      <Typography tag="h4" color="black" weight="bold" size="md" class="mt-4 w-100"> 종류 </Typography>
+      <Typography
+        v-for="(type, index) in currentData.types"
+        :key="type"
+        color="black"
+        weight="regular"
+        size="md"
+        class="mt-2 w-100 cursor-pointer p-2 bg-white"
+        @click="toggleVisible(index)"
+      >
+        {{ visibleList[index] ? type : '🙈 클릭해서 보기' }}
+      </Typography>
     </div>
-  </header>
 
-  <main>
-    <TheWelcome />
-  </main>
+    <button class="btn btn-primary w-100 mt-5" @click="onClickNext">다음 개념으로</button>
+  </BaseLayout>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<script setup>
+import Typography from './components/Common/Typography.vue';
+import BaseLayout from './components/Layouts/BaseLayout.vue';
+import data from '@/assets/data.json';
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+import { onMounted, ref } from 'vue';
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+const currentIndex = ref(0);
+const currentData = ref(data[currentIndex.value]);
+const visibleList = ref(Array.isArray(currentData.value?.types) ? currentData.value.types.map(() => false) : []);
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+const getRandomIndex = () => {
+  const randomIndex = Math.floor(Math.random() * data.length);
+  return randomIndex;
+};
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+const onClickNext = () => {
+  const randomIndex = getRandomIndex();
+  currentData.value = data[randomIndex];
+  currentIndex.value = randomIndex;
+  visibleList.value = currentData.value.types.map(() => false); // 다시 전부 보이게
+};
+
+const toggleVisible = (index) => {
+  visibleList.value[index] = !visibleList.value[index];
+};
+
+onMounted(() => {
+  // currentIndex.value = getRandomIndex();
+  currentIndex.value = 9;
+  currentData.value = data[currentIndex.value];
+  visibleList.value = Array.isArray(currentData.value?.types) ? currentData.value.types.map(() => false) : []; // 다시 전부 보이게
+});
+</script>
