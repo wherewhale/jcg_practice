@@ -1,15 +1,24 @@
 <style scoped></style>
 
 <template>
-  <BaseLayout>
-    <Typography tag="h2" color="black" weight="bold" size="lg"> {{ currentData.title }} </Typography>
-    <Typography tag="h3" color="black" weight="bold" size="md"> {{ currentData.concept }} </Typography>
+  <BaseLayout v-if="currentData">
+    <Typography color="black" weight="medium" size="md"
+      >{{ currentIndex + 1 }} / {{ shuffledData.length + 1 }}</Typography
+    >
+    <Typography tag="h2" color="black" weight="bold" size="lg">
+      {{ currentData.title }}
+    </Typography>
+    <Typography tag="h3" color="black" weight="bold" size="md">
+      {{ currentData.concept }}
+    </Typography>
     <figure class="mt-4" v-if="currentData?.src">
       <img :src="currentData?.src" alt="concept image" class="w-100" />
     </figure>
 
     <div v-if="currentData?.types" class="w-100">
-      <Typography tag="h4" color="black" weight="bold" size="md" class="mt-4 w-100"> 종류 </Typography>
+      <Typography tag="h4" color="black" weight="bold" size="md" class="mt-4 w-100">
+        종류
+      </Typography>
       <Typography
         v-for="(type, index) in currentData.types"
         :key="type"
@@ -28,36 +37,50 @@
 </template>
 
 <script setup>
-import Typography from './components/Common/Typography.vue';
-import BaseLayout from './components/Layouts/BaseLayout.vue';
-import data from '@/assets/data.json';
+import BaseLayout from './components/Layouts/BaseLayout.vue'
+import Typography from './components/Common/Typography.vue'
+import data from '@/assets/data.json'
 
-import { onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue'
 
-const currentIndex = ref(0);
-const currentData = ref(data[currentIndex.value]);
-const visibleList = ref(Array.isArray(currentData.value?.types) ? currentData.value.types.map(() => false) : []);
+const currentIndex = ref(0)
+const shuffledData = ref([])
+const currentData = ref(null)
+const visibleList = ref([])
 
-const getRandomIndex = () => {
-  const randomIndex = Math.floor(Math.random() * data.length);
-  return randomIndex;
-};
+// Fisher-Yates 셔플 함수
+const shuffleArray = (arr) => {
+  const copied = [...arr]
+  for (let i = copied.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[copied[i], copied[j]] = [copied[j], copied[i]]
+  }
+  return copied
+}
+
+const loadCurrentData = () => {
+  currentData.value = shuffledData.value[currentIndex.value]
+  visibleList.value = Array.isArray(currentData.value?.types)
+    ? currentData.value.types.map(() => false)
+    : []
+}
 
 const onClickNext = () => {
-  const randomIndex = getRandomIndex();
-  currentData.value = data[randomIndex];
-  currentIndex.value = randomIndex;
-  visibleList.value = currentData.value.types.map(() => false); // 다시 전부 보이게
-};
+  currentIndex.value++
+  if (currentIndex.value >= shuffledData.value.length) {
+    shuffledData.value = shuffleArray(data)
+    currentIndex.value = 0
+  }
+  loadCurrentData()
+}
 
 const toggleVisible = (index) => {
-  visibleList.value[index] = !visibleList.value[index];
-};
+  visibleList.value[index] = !visibleList.value[index]
+}
 
 onMounted(() => {
-  // currentIndex.value = getRandomIndex();
-  currentIndex.value = 9;
-  currentData.value = data[currentIndex.value];
-  visibleList.value = Array.isArray(currentData.value?.types) ? currentData.value.types.map(() => false) : []; // 다시 전부 보이게
-});
+  shuffledData.value = shuffleArray(data)
+  currentIndex.value = 0
+  loadCurrentData()
+})
 </script>
