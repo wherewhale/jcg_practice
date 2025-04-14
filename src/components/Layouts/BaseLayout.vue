@@ -9,6 +9,7 @@ main {
   padding: 2rem 1rem 6rem;
 }
 </style>
+
 <template>
   <div class="container bg-gray-1">
     <BaseHeader />
