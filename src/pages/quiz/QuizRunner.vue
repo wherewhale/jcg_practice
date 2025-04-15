@@ -8,7 +8,7 @@
     </div>
 
     <div class="card p-4" v-if="currentQuiz">
-      <Typography tag="h4" color="black" weight="bold" size="lg" class="mb-3 card-title">
+      <Typography tag="h4" color="black" weight="bold" size="lg" class="mb-3 card-title break-word">
         {{ currentQuiz.title }}
         Q. {{ currentQuiz.question }}
       </Typography>
@@ -24,7 +24,7 @@
       <button class="btn btn-primary w-100 mb-3" @click="checkAnswer">정답 확인</button>
 
       <div v-if="result !== null" :class="['alert', result ? 'alert-success' : 'alert-danger']">
-        {{ result ? '✅ 정답입니다!' : `❌ 틀렸어요! 정답은 "${currentQuiz.answer}"입니다.` }}
+        {{ result ? '✅ 정답입니다!' : `❌ 틀렸어요! 정답은 "${currentQuiz.answer[0]}"입니다.` }}
       </div>
 
       <button v-if="result !== null" class="btn btn-outline-success w-100" @click="nextQuestion">
@@ -65,7 +65,7 @@ const result = ref(null);
 
 const checkAnswer = () => {
   const answer = userAnswer.value.trim().toLowerCase();
-  result.value = answer === currentQuiz.value.answer.toLowerCase();
+  result.value = currentQuiz.value.answer.includes(answer);
 };
 
 const nextQuestion = () => {
