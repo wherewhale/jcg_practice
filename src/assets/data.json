@@ -64,7 +64,10 @@
     "title": "UML 집합 관계",
     "concept": "하나의 사물이 다른 사물을 포함하는 관계",
     "src": "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F08QCg%2FbtqZvMQBDLi%2FPn458IREoSifPA0n8TuzQk%2Fimg.png",
-    "types": ["예시 : 자동차가 엔진을 포함하는 관계", "포함되는 쪽에서 포함하는 쪽으로 속이 빈 마름모를 연결하여 표현"]
+    "types": [
+      "예시 : 자동차가 엔진을 포함하는 관계",
+      "포함되는 쪽에서 포함하는 쪽으로 속이 빈 마름모를 연결하여 표현"
+    ]
   },
   {
     "title": "UML 일반화 관계",
@@ -342,7 +345,10 @@
   {
     "title": "모듈화",
     "concept": "시스템의 기능들을 모듈 단위로 나누는 것",
-    "types": ["모듈간 결합도(Coupling)의 최소화가 목표", "모듈 내 요소들의 응집도(Cohesion)의 최대화가 목표"]
+    "types": [
+      "모듈간 결합도(Coupling)의 최소화가 목표",
+      "모듈 내 요소들의 응집도(Cohesion)의 최대화가 목표"
+    ]
   },
   {
     "title": "럼바우의 분석 기법",
@@ -401,7 +407,10 @@
     "title": "팬인/팬아웃",
     "concept": "모듈 제어 주체와 제어 피주체 간의 관계를 나타내는 지표",
     "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRiPsu0AYrY0VMs3UnWx4T_f1z1Et13DIxDg&s",
-    "types": ["팬인(Fan-in): 어떤 모듈을 제어하는 모듈의 수", "팬아웃(Fan-out): 어떤 모듈에 의해 제어되는 모듈의 수"]
+    "types": [
+      "팬인(Fan-in): 어떤 모듈을 제어하는 모듈의 수",
+      "팬아웃(Fan-out): 어떤 모듈에 의해 제어되는 모듈의 수"
+    ]
   },
   {
     "title": "IPC(Inter-Process Communication)",
@@ -439,7 +448,11 @@
   {
     "title": "디자인 패턴",
     "concept": "모듈 간의 관계 및 인터페이스를 설계할 때 참조할 수 있는 전형적인 해결 방식 또는 예제\n아래는 GOF의 디자인 패턴",
-    "types": ["생성 패턴(Creational Pattern)", "구조 패턴(Structural Pattern)", "행위 패턴(Behavioral Pattern)"]
+    "types": [
+      "생성 패턴(Creational Pattern)",
+      "구조 패턴(Structural Pattern)",
+      "행위 패턴(Behavioral Pattern)"
+    ]
   },
   {
     "title": "생성 패턴",
@@ -771,7 +784,7 @@
     "concept": "웹 응용 프로그램에 SQL을 삽입하여 데이터를 유출 및 변조하고, 관리자 인증을 우회하는 보안 약점"
   },
   {
-    "title": "개인키 안호화 기법(Private Key Encryption)",
+    "title": "개인키 암호화 기법(Private Key Encryption)",
     "concept": "대칭키 암호화 기법으로, 암호화와 복호화에 동일한 키를 사용하는 방식",
     "types": [
       "대칭 암호 기법 또는 단일키 암호화 기법이라고도 한다",
@@ -802,7 +815,11 @@
   {
     "title": "DES",
     "concept": "Data Encryption Standard",
-    "types": ["1975년 미국 NBS에서 발표한 개인키 블록 암호화 알고리즘", "블록 크기: 64비트", "키 길이: 56비트"]
+    "types": [
+      "1975년 미국 NBS에서 발표한 개인키 블록 암호화 알고리즘",
+      "블록 크기: 64비트",
+      "키 길이: 56비트"
+    ]
   },
   {
     "title": "AES",
@@ -824,7 +841,11 @@
   {
     "title": "MD5",
     "concept": "Message Digest Algorithm 5",
-    "types": ["1991년 로널드 리베스트가 개발한 해시 알고리즘", "블록 크기: 512비트", "키 길이: 128비트"]
+    "types": [
+      "1991년 로널드 리베스트가 개발한 해시 알고리즘",
+      "블록 크기: 512비트",
+      "키 길이: 128비트"
+    ]
   },
   {
     "title": "VPN",
@@ -859,7 +880,9 @@
   {
     "title": "정보보호 관리 체계",
     "concept": "ISMS; Information Security Management System : 정보 자산을 안전하게 보호하기 위한 보호 절차와 대책",
-    "types": ["조직에 맞는 정보보호 정책을 수립하고, 위험에 상시 대응하는 여러 보안 대책을 통합 관리, 운용한다"]
+    "types": [
+      "조직에 맞는 정보보호 정책을 수립하고, 위험에 상시 대응하는 여러 보안 대책을 통합 관리, 운용한다"
+    ]
   },
   {
     "title": "Ping of Death",
@@ -1101,7 +1124,9 @@
   {
     "title": "BGP(Border Gateway Protocol)",
     "concept": "자율 시스템 간의 라우팅 프로토콜로, EGP의 단점을 보완하기 위해 개발된 프로토콜",
-    "types": ["초기에 BGP 라우터들이 연결될 때에는 라우팅 테이블을 교환하고, 이후에는 변화된 정보만을 교환"]
+    "types": [
+      "초기에 BGP 라우터들이 연결될 때에는 라우팅 테이블을 교환하고, 이후에는 변화된 정보만을 교환"
+    ]
   },
   {
     "title": "블록체인(Blockchain)",
@@ -1173,7 +1198,6 @@
     "types": [
       "형상 식별: 형상 관리 대상에 이름과 관리 번호를 부여하고 계층 구조로 구분하여 식별",
       "형상 통제: 소프트웨어 업그레이드나 유지 보수 과정에서 생성된 다른 버전의 형상 항목을 관리하고 특정 절차와 도구를 결합시키는 작업",
-      "형상 통제: 식별된 형상 항목에 대한 변경 요구를 검토하여 기준선이 잘 반영될 수 있도록 조정하는 작업",
       "형상 감사: 기준선의 무결성을 평가하기 위해 확인, 검증, 검열 과정으로 승인하는 작업",
       "형상 기록: 형상의 식별, 통제, 감사 작업의 결과를 기록/관리하고 보고서를 작성하는 작업"
     ]
