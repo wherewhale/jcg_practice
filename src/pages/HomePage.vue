@@ -15,6 +15,7 @@
 
 <template>
   <BaseLayout v-if="currentData">
+    <StaticIntro v-if="!ready" />
     <transition class="w-100" name="slide" mode="out-in">
       <div :key="currentIndex">
         <Typography color="black" weight="medium" size="md">
@@ -54,50 +55,54 @@
 </template>
 
 <script setup>
-import BaseLayout from '@/components/Layouts/BaseLayout.vue'
-import Typography from '@/components/Common/Typography.vue'
-import data from '@/assets/data.json'
+import BaseLayout from '@/components/Layouts/BaseLayout.vue';
+import Typography from '@/components/Common/Typography.vue';
+import StaticIntro from '@/components/StaticIntro.vue';
 
-import { onMounted, ref } from 'vue'
+import data from '@/assets/data.json';
 
-const currentIndex = ref(0)
-const shuffledData = ref([])
-const currentData = ref(null)
-const visibleList = ref([])
+import { onMounted, ref } from 'vue';
+
+const currentIndex = ref(0);
+const shuffledData = ref([]);
+const currentData = ref(null);
+const visibleList = ref([]);
+const ready = ref(false);
 
 // Fisher-Yates 셔플 함수
 const shuffleArray = (arr) => {
-  const copied = [...arr]
+  const copied = [...arr];
   for (let i = copied.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[copied[i], copied[j]] = [copied[j], copied[i]]
+    const j = Math.floor(Math.random() * (i + 1));
+    [copied[i], copied[j]] = [copied[j], copied[i]];
   }
-  return copied
-}
+  return copied;
+};
 
 const loadCurrentData = () => {
-  currentData.value = shuffledData.value[currentIndex.value]
+  currentData.value = shuffledData.value[currentIndex.value];
   visibleList.value = Array.isArray(currentData.value?.types)
     ? currentData.value.types.map(() => false)
-    : []
-}
+    : [];
+};
 
 const onClickNext = () => {
-  currentIndex.value++
+  currentIndex.value++;
   if (currentIndex.value >= shuffledData.value.length) {
-    shuffledData.value = shuffleArray(data)
-    currentIndex.value = 0
+    shuffledData.value = shuffleArray(data);
+    currentIndex.value = 0;
   }
-  loadCurrentData()
-}
+  loadCurrentData();
+};
 
 const toggleVisible = (index) => {
-  visibleList.value[index] = !visibleList.value[index]
-}
+  visibleList.value[index] = !visibleList.value[index];
+};
 
 onMounted(() => {
-  shuffledData.value = shuffleArray(data)
-  currentIndex.value = 0
-  loadCurrentData()
-})
+  shuffledData.value = shuffleArray(data);
+  currentIndex.value = 0;
+  loadCurrentData();
+  ready.value = true; // 콘텐츠 준비 완료되면 전환
+});
 </script>
